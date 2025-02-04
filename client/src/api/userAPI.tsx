@@ -1,4 +1,5 @@
-import Auth from '../utils/auth';
+import { AuthService } from '../utils/auth';  // ✅ Use named import
+
 
 const retrieveUsers = async () => {
   try {

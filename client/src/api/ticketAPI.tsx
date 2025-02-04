@@ -1,6 +1,7 @@
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
-import Auth from '../utils/auth';
+import { AuthService } from '../utils/auth';  // ✅ Use named import
+
 
 const retrieveTickets = async () => {
   try {

@@ -7,7 +7,8 @@ import Swimlane from '../components/Swimlane';
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
 
-import auth from '../utils/auth';
+import { AuthService } from '../utils/auth';  // ✅ Use named import
+
 
 const boardStates = ['Todo', 'In Progress', 'Done'];
 

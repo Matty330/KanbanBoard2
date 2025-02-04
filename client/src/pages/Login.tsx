@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
+import { AuthService } from '../utils/auth';  // ✅ Use named import
 
-import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
 const Login = () => {
