@@ -1,28 +1,34 @@
 {
-  "name": "main",
+  "name": "kanban-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Backend for Kanban board with JWT authentication",
+  "main": "dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run client:build && npm run server",
-    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
-    "server": "cd server && npm start",
-    "server:dev": "cd server && npm run dev",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "client:build": "cd client && npm run build",
-    "client:dev": "cd client && npm run dev",
-    "build": "cd client && npm run build",
-    "seed": "cd server && npm run seed",
-    "render-build": "npm install && npm run build"
+    "dev": "npx nodemon src/server.ts",
+    "start": "node dist/server.js",
+    "build": "npx tsc",
+    "migrate": "npx prisma migrate dev --name init",
+    "generate": "npx prisma generate",
+    "seed": "npx sequelize db:seed:all"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.7.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.7.1",
+    "prisma": "^4.7.1",
+    "sequelize": "^6.32.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
-    "concurrently": "^8.2.2",
-    "nodemon": "^3.1.3",
-    "wait-on": "^7.2.0"
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/node": "^18.14.0",
+    "nodemon": "^3.1.3"
   }
 }
