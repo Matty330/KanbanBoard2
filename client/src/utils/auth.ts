@@ -1,31 +1,19 @@
-import { JwtPayload, jwtDecode } from 'jwt-decode';
+export const AuthService = {
+  login: async (username: string, password: string) => {
+      const data = await login(username, password);
+      localStorage.setItem("token", data.token);
+      return data;
+  },
 
-class AuthService {
-  getProfile() {
-    // TODO: return the decoded token
-  }
+  logout: () => {
+      localStorage.removeItem("token");
+  },
 
-  loggedIn() {
-    // TODO: return a value that indicates if the user is logged in
-  }
-  
-  isTokenExpired(token: string) {
-    // TODO: return a value that indicates if the token is expired
-  }
+  getToken: () => {
+      return localStorage.getItem("token");
+  },
 
-  getToken(): string {
-    // TODO: return the token
-  }
-
-  login(idToken: string) {
-    // TODO: set the token to localStorage
-    // TODO: redirect to the home page
-  }
-
-  logout() {
-    // TODO: remove the token from localStorage
-    // TODO: redirect to the login page
-  }
-}
-
-export default new AuthService();
+  isAuthenticated: () => {
+      return !!localStorage.getItem("token");
+  },
+};
