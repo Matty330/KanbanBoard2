@@ -7,9 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")  // ✅ Ensure .env has DATABASE_URL
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
+model users {
+  id        Int    @id @default(autoincrement())
+  username  String @unique
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
