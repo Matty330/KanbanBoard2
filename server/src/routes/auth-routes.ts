@@ -22,10 +22,11 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign({ userId: user.id, username: user.username }, SECRET_KEY, { expiresIn: "1h" });
 
-        res.json({ token });
+        return res.json({ token });
     } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "Internal server error" });
     }
 });
+
 
 export default router;
