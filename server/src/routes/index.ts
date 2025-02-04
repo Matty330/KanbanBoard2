@@ -1,12 +1,14 @@
-import { Router } from 'express';
-import authRoutes from './auth-routes.js';
-import apiRoutes from './api/index.js';
-import { authenticateToken } from '../middleware/auth.js';
+import express from "express";
+import authRoutes from "./auth-routes";
+import { authenticateToken } from "../middleware/auth";
 
-const router = Router();
+const router = express.Router();
 
-router.use('/auth', authRoutes);
-// TODO: Add authentication to the API routes
-router.use('/api', apiRoutes);
+router.use("/auth", authRoutes);
+
+// Protect API routes
+router.use("/tasks", authenticateToken, (req, res) => {
+    res.json({ message: "Authenticated route" });
+});
 
 export default router;
