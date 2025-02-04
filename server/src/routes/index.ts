@@ -1,6 +1,7 @@
 import express from "express";
-import authRoutes from "./auth-routes";
-import { authenticateToken } from "../middleware/auth";
+import authRoutes from "./auth-routes.js"; // Add `.js` for ES Modules
+import { authenticateToken } from "../middleware/auth.js"; // Add `.js`
+
 
 const router = express.Router();
 
