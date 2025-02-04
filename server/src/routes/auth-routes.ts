@@ -1,15 +1,30 @@
-import { Router, Request, Response } from 'express';
-import { User } from '../models/user.js';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import { db } from "../db";
 
-export const login = async (req: Request, res: Response) => {
-  // TODO: If the user exists and the password is correct, return a JWT token
-};
+dotenv.config();
 
-const router = Router();
+const router = express.Router();
+const SECRET_KEY = process.env.JWT_SECRET || "default_secret";
 
-// POST /login - Login a user
-router.post('/login', login);
+router.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        const user = await db.user.findUnique({ where: { username } });
+
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).json({ message: "Invalid username or password" });
+        }
+
+        const token = jwt.sign({ userId: user.id, username: user.username }, SECRET_KEY, { expiresIn: "1h" });
+
+        res.json({ token });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
 
 export default router;
